@@ -1,0 +1,179 @@
+{
+  "name": "codeacejumper",
+  "displayName": "Code Ace Jumper",
+  "description": "Visual Studio Code Ace Jump",
+  "icon": "images/ace-jumper.png",
+  "version": "3.3.2",
+  "publisher": "lucax88x",
+  "homepage": "https://github.com/lucax88x/CodeAceJumper",
+  "license": "https://github.com/lucax88x/CodeAceJumper/license.md",
+  "keywords": [
+    "jump",
+    "AceJump",
+    "EasyMotion",
+    "emacs",
+    "vim",
+    "jumpy",
+    "keyboard"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucax88x/CodeAceJumper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lucax88x/CodeAceJumper/issues",
+    "email": "lucax88x@gmail.com"
+  },
+  "engines": {
+    "vscode": "^1.23.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./dist/extension",
+  "extensionKind": [
+    "workspace",
+    "ui"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.aceJump",
+        "title": "AceJump: Jump"
+      },
+      {
+        "command": "extension.aceJump.multiChar",
+        "title": "AceJump: MultiChar"
+      },
+      {
+        "command": "extension.aceJump.line",
+        "title": "AceJump: Line"
+      },
+      {
+        "command": "extension.aceJump.selection",
+        "title": "AceJump: Selection"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.aceJump.input.stop",
+        "key": "escape",
+        "when": "editorTextFocus && aceJumpInput"
+      }
+    ],
+    "configuration": {
+      "title": "Ace Jump",
+      "type": "object",
+      "properties": {
+        "aceJump.placeholder.backgroundColor": {
+          "type": "string",
+          "default": "#c0b18b"
+        },
+        "aceJump.placeholder.color": {
+          "type": "string",
+          "default": "#333"
+        },
+        "aceJump.placeholder.upperCase": {
+          "type": "boolean",
+          "default": false
+        },
+        "aceJump.placeholder.border": {
+          "type": "string",
+          "default": "none"
+        },
+        "aceJump.placeholder.fontWeight": {
+          "type": "string",
+          "default": "500"
+        },
+        "aceJump.highlight.backgroundColor": {
+          "type": "string",
+          "default": "rgba(124,240,10,0.5)"
+        },
+        "aceJump.finder.pattern": {
+          "type": "string",
+          "default": "[ ,-.{_(\"'<\\[\t]"
+        },
+        "aceJump.finder.skipSelection": {
+          "type": "boolean",
+          "default": false
+        },
+        "aceJump.finder.onlyInitialLetter": {
+          "type": "boolean",
+          "default": true
+        },
+        "aceJump.finder.includeEndCharInSelection": {
+          "type": "boolean",
+          "default": true
+        },
+        "aceJump.dim.enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "aceJump.scroll.mode": {
+          "type": "string",
+          "enum": [
+            "none",
+            "center",
+            "top"
+          ],
+          "default": "center"
+        },
+        "aceJump.finder.jumpToLineEndings": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run lint && npm run prettier && webpack --mode production",
+    "vsce:login": "vsce login lucax88x",
+    "vsce:publish": "vsce publish",
+    "compile": "webpack --mode development",
+    "watch": "webpack --mode development --watch",
+    "test-compile": "tsc -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run test-compile && node ./node_modules/vscode/bin/test",
+    "lint": "eslint --max-warnings=0 ./src/**/*.ts",
+    "prettier": "prettier --check ./src/**/*.ts",
+    "fix-format": "eslint --fix ./src/**/*.ts && prettier --write ./src/**/*.ts"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/explicit-function-return-type": "off"
+    }
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.1",
+    "@types/ramda": "^0.26.19",
+    "@types/sinon": "^7.0.13",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
+    "mocha": "^6.2.0",
+    "prettier": "^1.19.1",
+    "sinon": "^7.4.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.6.3",
+    "vsce": "^1.69.0",
+    "vscode": "^1.1.36",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "ramda": "^0.26.1",
+    "xmlbuilder": "^13.0.2"
+  }
+}
